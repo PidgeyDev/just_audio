@@ -961,9 +961,10 @@ class AudioPlayer {
           // If the native platform wasn't already active, activating it will
           // implicitly restore the playing state and send a play request.
           _setPlatformActive(true, playCompleter: playCompleter)
-            ?.catchError((dynamic e) {
-               // report error to play completer.
-               playCompleter.completeError(e);
+              ?.catchError((Object e) {
+            // report error to play completer.
+            playCompleter.completeError(e);
+            return null;
           });
         }
       }
