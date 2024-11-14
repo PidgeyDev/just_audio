@@ -1513,9 +1513,10 @@ class AudioPlayer {
           if (checkInterruption()) return platform;
           durationCompleter.complete(duration);
         } catch (e, stackTrace) {
+          durationCompleter.completeError(e, stackTrace);
+          await Future.delayed(Duration.zero);
           await _setPlatformActive(false)
               ?.catchError((dynamic e) async => null);
-          durationCompleter.completeError(e, stackTrace);
         }
       } else {
         durationCompleter.complete(null);
